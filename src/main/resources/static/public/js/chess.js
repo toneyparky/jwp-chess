@@ -16,7 +16,9 @@ window.onload = function () {
     let startPosition = null;
 
     async function getChessGame() {
-        const response = await fetch("http://localhost:8080/board");
+        let pathName = window.location.pathname;
+        alert(pathName);
+        const response = await fetch(`http://localhost:8080/board/${pathName}`);
         return await response.json();
     }
 
@@ -65,7 +67,8 @@ window.onload = function () {
     })();
 
     function chooseFirstPosition(position) {
-        fetch(`http://localhost:8080/source?source=${position}`, {method: "GET"})
+        fetch(`http://localhost:8080/source?source=${position}`,
+          {method: "GET"})
             .then(res => res.json())
             .then(data => {
                 startPosition = data.position;
